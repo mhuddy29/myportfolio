@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mhuddy Dagatan | Android Software Engineer Portfolio</title>
+    <style>
+        /* CSS VARIABLES - DESIGN SYSTEM */
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --primary: #0284c7;
+            --primary-hover: #0369a1;
+            --accent: #38bdf8;
+            --border: #e2e8f0;
+            --tag-bg: #f0f9ff;
+            --tag-text: #0369a1;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --radius: 12px;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #38bdf8;
+            --primary-hover: #7dd3fc;
+            --accent: #0ea5e9;
+            --border: #334155;
+            --tag-bg: #0c4a6e;
+            --tag-text: #7dd3fc;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.5);
+            --shadow-hover: 0 20px 25px -5px rgb(0 0 0 / 0.5);
+        }
+
+        /* RESET & BASE */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 0 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        /* HEADER SECTION */
+        header {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .header-controls {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: #ffffff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            box-shadow: none;
+        }
+        .btn-secondary:hover {
+            background-color: var(--border);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            font-size: 0.95rem;
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+        }
+
+        .contact-grid a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-grid a:hover {
+            text-decoration: underline;
+        }
+
+        /* SECTIONS */
+        section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* SEARCH & FILTER CONTROLS */
+        .interactive-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .search-input {
+            background: var(--bg-color);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 300px;
+            font-size: 0.9rem;
+        }
+
+        .search-input:focus {
+            outline: 2px solid var(--primary);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            box-shadow: none;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* PROJECTS */
+        .project-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .project-links a {
+            font-size: 0.9rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-left: 12px;
+            font-weight: 600;
+        }
+
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* SKILLS GRID */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-category {
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            padding: 20px;
+            border-radius: var(--radius);
+        }
+
+        .skill-category h3 {
+            font-size: 1.05rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        /* TIMELINES (EXPERIENCE) */
+        .timeline-item {
+            position: relative;
+            border-left: 2px solid var(--border);
+            padding-left: 25px;
+            padding-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .time-meta {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        li::before {
+            content: "•";
+            color: var(--primary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+
+        /* FLOATING UTILITIES */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            padding: 12px;
+            border-radius: 50%;
+            display: none;
+            z-index: 100;
+        }
+
+        .hidden { display: none !important; }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            section, header { padding: 25px; }
+            .header-controls { position: relative; top: 0; right: 0; margin-bottom: 20px; }
+            .interactive-bar { flex-direction: column; align-items: flex-start; }
+            .search-input { max-width: 100%; }
+        }
+
+        /* PRINT OVERRIDES */
+        @media print {
+            body { background: white; color: black; font-size: 10pt; }
+            .container { max-width: 100%; padding: 0; }
+            header, section, .project-card { box-shadow: none !important; border: 1px solid #cbd5e1 !important; margin-bottom: 20px !important; page-break-inside: avoid; }
+            .header-controls, .interactive-bar, .back-to-top { display: none !important; }
+            .project-card { display: block !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HEADER -->
+        <header>
+            <div class="header-controls">
+                <button class="btn-secondary" id="copyEmailBtn" onclick="copyEmail()">Copy Email</button>
+                <button id="themeToggle">Dark Mode</button>
+            </div>
+            <h1>MHUDDY T. DAGATAN</h1>
+            <div class="subtitle">Senior / Mid-Level Android Software Engineer</div>
+            <div class="contact-grid">
+                <div>📍 Cebu City, Philippines</div>
+                <div>📞 +63 968 7042 059</div>
+                <div>📧 <span id="emailText">mhuddydagatan@gmail.com</span></div><br>
+                <div>💻 <a href="https://github.com/yourusername" target="_blank">GitHub Profile</a></div>
+                <div>👔 <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn Profile</a></div>
+            </div>
+        </header>
+
+        <!-- SUMMARY -->
+        <section id="summary">
+            <h2>Professional Summary</h2>
+            <p>A highly skilled and results-driven Android Application Developer with <strong>[Number]</strong> years of experience designing, developing, and deploying high-performance, scalable mobile applications. Proven expertise in native Android development using Kotlin and Java, deep understanding of modern Android architecture components (MVVM/MVI), and a strong commitment to writing clean, maintainable, and testable code. Adept at optimizing app performance, implementing robust security measures, and delivering intuitive, user-centric interfaces that drive engagement.</p>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+            <h2>Technical Skills Matrix</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Core Languages</h3>
+                    <p>Kotlin, Java, SQL, XML, HTML/CSS</p>
+                </div>
+                <div class="skill-category">
+                    <h3>UI & Layout</h3>
+                    <p>Jetpack Compose, Material Design 3, Custom Views, ConstraintLayout, MotionLayout</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Architecture</h3>
+                    <p>MVVM, MVI, Clean Architecture, Jetpack Lifecycle, Room DB, WorkManager, DataStore</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Asynchronous & Network</h3>
+                    <p>Kotlin Coroutines, Flow (StateFlow), RxJava, Retrofit, OkHttp, Ktor</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Dependency Injection</h3>
+                    <p>Dagger Hilt, Koin, Dagger 2</p>
+                </div>
+                <div class="skill-category">
+                    <h3>Testing & CI/CD</h3>
+                    <p>JUnit 5, Mockk, Espresso, Compose UI Testing, GitHub Actions, Bitrise, Fastlane</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects">
+            <h2>Featured Android Projects</h2>
+            
+            <div class="interactive-bar">
+                <div class="filter-tabs">
+                    <button class="tab-btn active" onclick="filterCategory('all')">All</button>
+                    <button class="tab-btn" onclick="filterCategory('compose')">Compose</button>
+                    <button class="tab-btn" onclick="filterCategory('xml')">XML / Architecture</button>
+                </div>
+                <input type="text" id="projectSearch" class="search-input" placeholder="Search projects by keyword..." onkeyup="searchProjects()">
+            </div>
+
+            <div id="projectContainer">
+                <!-- Project 1 -->
+                <div class="project-card" data-tech="compose">
+                    <div class="project-header">
+                        <h3>[App Title 1] — E-Commerce & Fintech Solution</h3>
+                        <div class="project-links">
+                            <a href="#" target="_blank">Play Store</a>
+                            <a href="#" target="_blank">Source Code</a>
+                        </div>
+                    </div>
+                    <div class="badge-container">
+                        <span class="badge">Kotlin</span>
+                        <span class="badge">Jetpack Compose</span>
+                        <span class="badge">MVVM</span>
+                        <span class="badge">Coroutines</span>
+                        <span class="badge">Hilt</span>
+                    </div>
+                    <p>A comprehensive native Android application designed to provide users with a seamless, intuitive shopping experience. Implemented real-time synchronization, secure biometric authentication, and high-performance image caching.</p>
+                    <ul style="margin-top: 12px;">
+                        <li>Engineered user onboarding flow using Jetpack Compose, reducing drop-off rates by 15%.</li>
+                        <li>Implemented offline-first functionality utilizing Room database to cache product catalogs.</li>
+                        <li>Architected network layers with Retrofit and custom OkHttp interceptors for token management.</li>
+                    </ul>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card" data-tech="xml">
+                    <div class="project-header">
+                        <h3>[App Title 2] — Fitness Tracker & Wearable IoT</h3>
+                        <div class="project-links">
+                            <a href="#" target="_blank">Play Store</a>
+                            <a href="#" target="_blank">Source Code</a>
+                        </div>
+                    </div>
+                    <div class="badge-container">
+                        <span class="badge">Kotlin</span>
+                        <span class="badge">XML Layouts</span>
+                        <span class="badge">MVI</span>
+                        <span class="badge">RxJava2</span>
+                        <span class="badge">Bluetooth LE</span>
+                    </div>
+                    <p>A robust real-time tracking application that communicates directly with smart wearable devices via Bluetooth Low Energy to monitor, visualize, and synchronize user biometric data.</p>
+                    <ul style="margin-top: 12px;">
+                        <li>Developed background scheduling with WorkManager to sync BLE data securely in low-power states.</li>
+                        <li>Utilized MVI architecture alongside RxJava to build complex, highly predictable state-driven screens.</li>
+                        <li>Optimized app battery consumption by 20% by debugging resource lifecycles with Android Studio Profiler.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience">
+            <h2>Professional Experience</h2>
+            
+            <div class="timeline-item">
+                <div class="time-meta">[Month, Year] – Present</div>
+                <h3 style="margin-bottom: 2px;">Senior Android Developer</h3>
+                <div style="font-style: italic; color: var(--text-muted); margin-bottom: 12px;">[Current Company Name] — Remote / Full-time</div>
+                <ul>
+                    <li>Lead a cross-functional agile team of 5 mobile developers to deliver enterprise-grade native Android features supporting millions of active monthly users.</li>
+                    <li>Spearheaded the migration from an aging Java/XML legacy codebase into modern Kotlin/Jetpack Compose, improving development velocity by 30%.</li>
+                    <li>Established modularization strategies (feature-by-feature modules) cutting local and CI build times significantly.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="time-meta">[Month, Year] – [Month, Year]</div>
+                <h3 style="margin-bottom: 2px;">Android App Developer</h3>
+                <div style="font-style: italic; color: var(--text-muted); margin-bottom: 12px;">[Previous Company Name] — On-site</div>
+                <ul>
+                    <li>Collaborated closely with UX/UI designers to build high-fidelity custom views conforming fully to Material Design standards.</li>
+                    <li>Integrated third-party systems including Stripe SDK for checkout and Firebase for precise analytics collection.</li>
+                    <li>Resolved hidden memory leaks and rendering stalls using LeakCanary, dropping launch latency by 400ms.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- EDUCATION & CERTIFICATIONS -->
+        <section id="education">
+            <h2>Education & Certifications</h2>
+            <h3 style="font-size: 1.1rem; margin-bottom: 2px;">Bachelor of Science in Computer Science / Software Engineering</h3>
+            <div style="color: var(--text-muted); margin-bottom: 15px;">[University Name] — [Graduation Year]</div>
+            
+            <p style="font-weight: 700; margin-bottom: 8px;">Professional Certifications:</p>
+            <ul>
+                <li>Associate Android Developer (Google Certified)</li>
+                <li>Meta Android Developer Professional Certificate</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()">↑</button>
+
+    <!-- JS LOGIC LAYER -->
+    <script>
+        // Theme Switching Configuration
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+        
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            themeToggleBtn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            localStorage.setItem('portfolio-theme', theme);
+        }
+        
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+        });
+        setTheme(savedTheme);
+
+        // Copy Email to Clipboard Feature
+        function copyEmail() {
+            const email = document.getElementById('emailText').innerText;
+            navigator.clipboard.writeText(email).then(() => {
+                const btn = document.getElementById('copyEmailBtn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy Email', 2000);
+            });
+        }
+
+        // Live Dynamic Project Filtering Matrix
+        let activeCategory = 'all';
+
+        function filterCategory(category) {
+            activeCategory = category;
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            evaluateFilters();
+        }
+
+        function searchProjects() {
+            evaluateFilters();
+        }
+
+        function evaluateFilters() {
+            const searchQuery = document.getElementById('projectSearch').value.toLowerCase();
+            const cards = document.querySelectorAll('.project-card');
+
+            cards.forEach(card => {
+                const matchCategory = (activeCategory === 'all' || card.getAttribute('data-tech') === activeCategory);
+                const textContext = card.innerText.toLowerCase();
+                const matchSearch = textContext.includes(searchQuery);
+
+                if (matchCategory && matchSearch) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // Back to Top Button Behavior logic
+        const topBtn = document.getElementById('backToTopBtn');
+        window.onscroll = function() {
+            if (document.body.scrollTop > 400 || document.documentElement.scrollTop > 400) {
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
